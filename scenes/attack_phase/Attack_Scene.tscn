@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://attack_phase/Enemy_Controller.gd" type="Script" id=1]
+[ext_resource path="res://scenes/attack_phase/Enemy_Controller.gd" type="Script" id=1]
 
 [node name="Node2D" type="Node2D"]
 

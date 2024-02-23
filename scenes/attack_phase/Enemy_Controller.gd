@@ -4,7 +4,7 @@ extends Node2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var BASIC_ENEMY = preload("res://attack_phase/Enemies/Basic_Enemy/Basic_Enemy.tscn")
+onready var BASIC_ENEMY = preload("res://scenes/attack_phase/Enemies/Basic_Enemy/Basic_Enemy.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,7 +18,7 @@ func _process(delta):
 func _on_Timer_timeout():
 	var basicEnemy = BASIC_ENEMY.instance()
 		
-	var dist = 210
+	var dist = 500
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var angle = rng.randi_range(0, 360)
