@@ -17,6 +17,10 @@ func _physics_process(delta):
 	if can_throw and food_count > 0 and Input.is_action_just_pressed("ui_left_click"):
 		throw_food()
 		change_food(-1)
+	
+	#test buying food
+	#if Input.is_action_just_pressed("ui_up"):
+	#	spend_money(1)
 
 func player_movement():
 	if Input.is_action_pressed("move_forwards"):
@@ -69,3 +73,11 @@ func change_food(change): # Call with positive value to add food, negative value
 
 func change_money(change): # Call with positive value to add money, negative value to remove money.
 	money += change
+
+func spend_money(n): #buying food
+	if money>=n:
+		change_money(-n)
+		change_food(n)
+	#print(money, food_count)
+
+
