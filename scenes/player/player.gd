@@ -5,13 +5,18 @@ export var SPEED = 256
 const FOOD = preload("res://scenes/player/duck_food.tscn")
 var food = FOOD.instance()
 var can_throw = true
-
+export var food_count = 10
+export var money = 10
+export var is_active = true
 
 func _physics_process(delta):
+	if !is_active:
+		return
+	
 	player_movement()
-	if can_throw and Input.is_action_just_pressed("ui_left_click"):
+	if can_throw and food_count > 0 and Input.is_action_just_pressed("ui_left_click"):
 		throw_food()
-
+		change_food(-1)
 
 func player_movement():
 	if Input.is_action_pressed("move_forwards"):
@@ -58,3 +63,9 @@ func throw_food():
 
 func _on_throw_timer_timeout():
 	can_throw = true
+
+func change_food(change): # Call with positive value to add food, negative value to remove food.
+	food_count += change
+
+func change_money(change): # Call with positive value to add money, negative value to remove money.
+	money += change
