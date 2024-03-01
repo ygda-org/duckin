@@ -11,12 +11,17 @@ config_version=4
 [application]
 
 config/name="duckin"
-run/main_scene="res://scenes/attack_phase/Attack_Scene.tscn"
+run/main_scene="res://scenes/player/player_test.tscn"
 config/icon="res://icon.png"
 
 [display]
 
 window/dpi/allow_hidpi=true
+
+[global]
+
+def=false
+default=false
 
 [gui]
 
