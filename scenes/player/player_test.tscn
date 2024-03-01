@@ -4,6 +4,7 @@
 [ext_resource path="res://scenes/shop/shop.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/shop/shop_menu.tscn" type="PackedScene" id=3]
 
+
 [node name="player_test" type="Node2D"]
 
 [node name="player" parent="." instance=ExtResource( 1 )]
