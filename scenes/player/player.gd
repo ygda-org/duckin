@@ -13,6 +13,7 @@ func _physics_process(delta):
 	if !is_active:
 		return
 	
+	update_ui()
 	player_movement()
 	if can_throw and food_count > 0 and Input.is_action_just_pressed("ui_left_click"):
 		throw_food()
@@ -21,6 +22,10 @@ func _physics_process(delta):
 	#test buying food
 	#if Input.is_action_just_pressed("ui_up"):
 	#	spend_money(1)
+
+func update_ui():
+	$player_ui.money = money
+	$player_ui.food = food_count
 
 func player_movement():
 	if Input.is_action_pressed("move_forwards"):
@@ -44,8 +49,8 @@ func player_movement():
 
 
 func throw_food():
-	var dir_to = position.direction_to(get_viewport().get_mouse_position())
-	var distance_to = position.distance_to(get_viewport().get_mouse_position())
+	var dir_to = global_position.direction_to(get_global_mouse_position())
+	var distance_to = global_position.distance_to(get_global_mouse_position())
 	food = FOOD.instance()
 	food.position = global_position + dir_to*45
 	food.dir = dir_to
