@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
 [ext_resource path="res://scenes/player/duck_food.gd" type="Script" id=2]
@@ -20,7 +20,10 @@ damping_random = 1.0
 scale = 0.5
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 16.0312
+radius = 175.011
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 59.0762
 
 [node name="duck_food" type="RigidBody2D"]
 mode = 3
@@ -53,5 +56,12 @@ autostart = true
 shape = SubResource( 1 )
 disabled = true
 
+[node name="hapyRadius" type="Area2D" parent="."]
+
+[node name="happyShape" type="CollisionShape2D" parent="hapyRadius"]
+shape = SubResource( 3 )
+disabled = true
+
 [connection signal="timeout" from="travel_timer" to="." method="_on_travel_timer_timeout"]
-[connection signal="area_entered" from="Radius" to="." method="_on_Radius_area_entered"]
+[connection signal="body_entered" from="Radius" to="." method="_on_Radius_body_entered"]
+[connection signal="body_entered" from="hapyRadius" to="." method="_on_hapyRadius_body_entered"]

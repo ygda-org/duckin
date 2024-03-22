@@ -18,6 +18,17 @@ func _on_travel_timer_timeout():
 	has_started = true
 	speed = 0
 	$Radius/CollisionShape2D.disabled = false
+	$hapyRadius/happyShape.disabled = false
 
-func _on_Radius_area_entered(area):
-	pass
+	
+
+
+func _on_Radius_body_entered(body):
+	print(body.name)
+	if "Duck" in body.name:
+		body._interest(position)
+
+
+func _on_hapyRadius_body_entered(body):
+	if "Duck" in body.name:
+		body._happy()
