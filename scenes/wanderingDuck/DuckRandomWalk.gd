@@ -16,6 +16,7 @@ var direction = Vector2(rand_range(-10, 10), rand_range(-10, 10)).normalized()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$anim.play("Wander")
 	walk_ready = true
 	walking = false
 	randomize()
@@ -25,13 +26,18 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (happy):
-		pass
+		$anim.play("default")
 	elif (interested):
 		direction = position.direction_to(seedPos)
 		move_and_slide(direction * speed)
 	else:
 		if walk_ready:
+			$anim.play("Wander")
 			direction = Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized()
+			if direction.x > 0:
+				$anim.flip_h = true
+			else:
+				$anim.flip_h = false
 			start_timer()
 		if walking:
 			move_and_slide(direction * speed)
