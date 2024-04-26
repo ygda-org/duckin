@@ -44,8 +44,10 @@ func chancer():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if (happy):
-		$anim.play("default")
+		$anim.play("Wander")
+		interested = false
 	elif (interested):
+		speed = 100
 		direction = position.direction_to(seedPos)
 		move_and_slide(direction * speed)
 	else:
