@@ -30,12 +30,14 @@ func chancer():
 	chancing = false
 	var random_num = rand_range(0, 100)
 	if random_num > 0 and random_num < 30:
-		print("idle")
+		$anim.play("default")
+		#print("idle")
 		walk_ready = false
 		walking = false
 		idle = true
 	else:
-		print("walking")
+		$anim.play("Wander")
+		#print("walking")
 		walk_ready = false
 		walking = true
 		idle = false
@@ -46,13 +48,16 @@ func _process(delta):
 	if (happy):
 		$anim.play("default")
 	elif (interested):
-		direction = position.direction_to(seedPos)
 		move_and_slide(direction * speed)
 	else:
 		if idle:
 			speed = 0
 		elif walk_ready:
 			direction = Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized()
+			if direction.x > 0:
+				$anim.flip_h = true
+			else:
+				$anim.flip_h = false
 			chancer()
 		elif walking:
 			speed = 100
@@ -74,6 +79,11 @@ func start_timer():
 
 func _interest(pos):
 	seedPos = pos
+	direction = position.direction_to(seedPos)
+	if direction.x > 0:
+		$anim.flip_h = true
+	else:
+		$anim.flip_h = false
 	interested = true
 
 func _happy():
