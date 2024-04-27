@@ -5,6 +5,7 @@ export var SPEED = 256
 const FOOD = preload("res://scenes/player/duck_food.tscn")
 var food = FOOD.instance()
 var can_throw = true
+var ducks = 0
 export var food_count = 10
 export var money = 10
 export var is_active = true
@@ -72,7 +73,10 @@ func throw_food():
 
 func _on_throw_timer_timeout():
 	can_throw = true
-
+	
+func addDucks(duckNum): # Called in duck_food.gd to add ducks to the players duck count on collection
+	ducks += duckNum
+	
 func change_food(change): # Call with positive value to add food, negative value to remove food.
 	food_count += change
 
