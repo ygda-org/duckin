@@ -12,7 +12,7 @@ func _ready():
 func change_scenes():
 	var curr = get_child(0)
 	var player = get_player(curr)
-	var player_data = {"Food": player.food_count, "Money": player.money}
+	var player_data = {"Food": player.food_count, "Money": player.money, "Ducks": player.duck_count}
 	
 	var scene = curr
 	if curr.name == attack_name:
@@ -24,8 +24,13 @@ func change_scenes():
 	
 	remove_child(curr)
 	player = get_player(scene)
+	
+	if curr.name == attack_name:
+		player.is_active = false
+	
 	player.food_count = player_data["Food"]
 	player.money = player_data["Money"]
+	player.duck_count = player_data["Ducks"]
 	add_child(scene)
 
 func get_player(phase):
