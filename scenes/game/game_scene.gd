@@ -21,9 +21,14 @@ func change_scenes():
 	elif curr.name == recruit_name:
 		scene = ATTACK.instance()
 		print("Attack")
+		
+	var is_attack_scene = curr.name == recruit_name
 	
 	remove_child(curr)
 	player = get_player(scene)
+	
+	player.is_attacking = is_attack_scene
+	
 	player.food_count = player_data["Food"]
 	player.money = player_data["Money"]
 	player.duck_count = player_data["Ducks"]

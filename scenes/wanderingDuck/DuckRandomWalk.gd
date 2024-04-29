@@ -99,5 +99,7 @@ func _on_WalkTimer_timeout():
 func _on_HappyTimer_timeout():
 	interested = false
 	happy = true
+	
+	
 
 

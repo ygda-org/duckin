@@ -30,7 +30,6 @@ func _on_hapyRadius_body_entered(body):
 	if "Duck" in body.name:
 		ducks.append(body)
 		body._happy()
-		print('duck')
 	if "player" in body.name: #collection!
 		body.addDucks(len(ducks))
 		for duck in ducks:
