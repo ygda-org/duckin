@@ -7,12 +7,13 @@ const DUCK = preload("res://scenes/Explosive Duck/Explosive Duck.tscn")
 var food = FOOD.instance()
 var can_throw = true
 export var food_count = 10
-export var money = 10
 export var duck_count = 0
+export var money = 10
 export var is_active = true
 export var is_attacking = false
+export var can_attack = false
 
-func _physics_process(delta):	
+func _physics_process(delta):
 	if !is_active:
 		return
 	

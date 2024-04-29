@@ -11,6 +11,7 @@ var seedPos = Vector2()
 var direction = Vector2(rand_range(-10, 10), rand_range(-10, 10)).normalized()
 var chance = 0
 var chancing = false
+var recruited = false
 var idle = false
 # Declare member variables here. Examples:
 # var a = 2
@@ -88,10 +89,14 @@ func _interest(pos):
 
 func _happy():
 	$HappyTimer.start()
+	if !recruited:
+		recruited = true
+		get_parent().get_parent().get_node("player").addDucks(1)
 
 func _on_WalkTimer_timeout():
 	# When the timer finishes, choose a new direction and restart the timer
 	print("changing direction")
+	walk_ready = true
 	walk_ready = true
 	walking = false
 
@@ -99,5 +104,7 @@ func _on_WalkTimer_timeout():
 func _on_HappyTimer_timeout():
 	interested = false
 	happy = true
+	
+	
 
 
