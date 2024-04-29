@@ -3,18 +3,26 @@ extends KinematicBody2D
 var velocity = Vector2()
 export var SPEED = 256
 const FOOD = preload("res://scenes/player/duck_food.tscn")
+const DUCK = preload("res://scenes/Explosive Duck/Explosive Duck.tscn")
 var food = FOOD.instance()
 var can_throw = true
 export var food_count = 10
 export var money = 10
 export var duck_count = 0
 export var is_active = true
+export var is_attacking = false
 
-func _physics_process(delta):
+func _physics_process(delta):	
 	if !is_active:
 		return
 	
 	update_ui()
+	
+	if is_attacking:
+		if Input.is_action_just_pressed("ui_left_click"):
+			throw_duck()
+		return
+		
 	player_movement()
 	if can_throw and food_count > 0 and Input.is_action_just_pressed("ui_left_click"):
 		throw_food()
@@ -71,6 +79,12 @@ func throw_food():
 	
 	can_throw = false
 	$throw_timer.start()
+	
+func throw_duck():
+	if duck_count > 0:
+		var duck = DUCK.instance()
+		get_parent().add_child(duck)
+		addDucks(-1)
 
 func _on_throw_timer_timeout():
 	can_throw = true
