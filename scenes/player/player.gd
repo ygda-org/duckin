@@ -105,4 +105,5 @@ func spend_money(n): #buying food
 		change_food(n)
 	#print(money, food_count)
 
-
+func _duck_ping():
+	$scene_changer._duck_ping()

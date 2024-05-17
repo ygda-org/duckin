@@ -6,7 +6,7 @@ var click_position = Vector2(0,0)
 var damage = 50
 var blast_radius = 100
 var click = false
-
+var player = null
 
 func _ready():
 	var dir_to = global_position.direction_to(get_global_mouse_position())
@@ -15,6 +15,8 @@ func _ready():
 	
 	if click_position.x > 0:
 		$Duck.flip_h = true
+	
+	_update_player()
 
 func _physics_process(delta):
 	
@@ -29,4 +31,10 @@ func blow_up():
 		var distance = position.distance_to(enemy.global_position)
 		if distance <= blast_radius:
 			enemy.take_damage(damage)	
-	queue_free() 
+	player._duck_ping()
+	queue_free()
+
+func _update_player():
+	for node in get_parent().get_children():
+		if node.name == "player":
+			player = node
