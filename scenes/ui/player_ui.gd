@@ -33,3 +33,6 @@ func _recenter():
 		child.rect_position.x = t_pos - (child.rect_size.x/2)
 		t_pos += offset
 		child.rect_position.y = ($info.rect_size.y - child.rect_size.y)/2
+
+func _set_timer(is_visible):
+	$timer.visible = is_visible
