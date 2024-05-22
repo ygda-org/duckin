@@ -33,5 +33,6 @@ func _on_hapyRadius_body_entered(body):
 	if "player" in body.name: #collection!
 		body.addDucks(len(ducks))
 		for duck in ducks:
-			duck.queue_free()
+			if duck and weakref(duck).get_ref():
+				duck.call_deferred("free")
 		ducks = []

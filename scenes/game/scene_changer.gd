@@ -2,7 +2,7 @@ extends Node
 
 var player = null
 var ui = null
-var max_time = 100
+var max_time = 0  # Placeholder value
 var game_name = "game_scene"
 var recruit_name = "RecruitScene"
 var attack_name = "Node2D"
@@ -23,8 +23,8 @@ func _on_Timer_timeout():
 	else:
 		$Timer.start()
 
-func _process(delta):
-	ui.time = max_time - $Timer.time_left
+func _process(_delta):
+	ui.time = ui.max_time - $Timer.time_left
 
 func _phase():
 	var curr = get_tree().current_scene

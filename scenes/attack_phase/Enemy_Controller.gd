@@ -10,11 +10,6 @@ onready var BASIC_ENEMY = preload("res://scenes/attack_phase/Enemies/Basic_Enemy
 func _ready():
 	position = Vector2(3, 4)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func _on_Timer_timeout():
 	var basicEnemy = BASIC_ENEMY.instance()
 		
