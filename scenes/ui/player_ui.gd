@@ -1,12 +1,13 @@
 extends Control
 
 export var time = 0
-export var max_time = 100
+export var max_time = 0  # Placeholder value
 export var money = 0
 export var food = 0
 export var ducks = 0
 
-func _process(delta):
+
+func _process(_delta):
 	_update()
 
 func _update():

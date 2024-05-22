@@ -16,7 +16,7 @@ func _ready():
 	#Ducks can't spawn this close to the player
 	var playerBuffer = 300
 	
-	for i in range(amountOfDucks):
+	for _num in range(amountOfDucks):
 		var newDuck = BASIC_DUCK.instance()
 		rng.randomize()
 		newDuck.position = Vector2(rng.randf_range(-1.0, 1.0) * spawnRadius, rng.randf_range(-1.0, 1.0) * spawnRadius)

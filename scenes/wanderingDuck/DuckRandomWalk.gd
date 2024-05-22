@@ -1,7 +1,7 @@
 # use for every duck object that wanders around
 extends KinematicBody2D
 
-var speed = 100
+var speed = 6000
 var timer = 2.0
 var walk_ready = true
 var walking = false
@@ -48,7 +48,8 @@ func _process(delta):
 	if (happy):
 		$anim.play("default")
 	elif (interested):
-		move_and_slide(direction * speed)
+		# warning-ignore:return_value_discarded
+		move_and_slide(direction * speed * delta)
 	else:
 		if idle:
 			speed = 0
@@ -60,17 +61,19 @@ func _process(delta):
 				$anim.flip_h = false
 			chancer()
 		elif walking:
-			speed = 100
-			move_and_slide(direction * speed)
+			speed = 6000
+			# warning-ignore:return_value_discarded
+			move_and_slide(direction * speed * delta)
 			
 func _physics_process(delta):
 	if chancing:
-		chance += 0.01
+		chance += delta
 		var random_num = rand_range(0, 100)
 		if chance > random_num:
 			idle = false
 			walking = false
 			walk_ready = true
+
 func start_timer():
 	# Start the timer called WalkTimer to wait for 2 seconds
 	$WalkTimer.start(timer)
@@ -95,11 +98,6 @@ func _on_WalkTimer_timeout():
 	walk_ready = true
 	walking = false
 
-
 func _on_HappyTimer_timeout():
 	interested = false
 	happy = true
-	
-	
-
-

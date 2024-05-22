@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 var velocity = Vector2()
-export var SPEED = 256
+export var SPEED = 120  # velocity of 2 when 60 FPS
 const FOOD = preload("res://scenes/player/duck_food.tscn")
 const DUCK = preload("res://scenes/Explosive Duck/Explosive Duck.tscn")
 var food = FOOD.instance()
@@ -24,7 +24,7 @@ func _physics_process(delta):
 			throw_duck()
 		return
 		
-	player_movement()
+	player_movement(delta)
 	if can_throw and food_count > 0 and Input.is_action_just_pressed("ui_left_click"):
 		throw_food()
 		change_food(-1)
@@ -38,21 +38,21 @@ func update_ui():
 	$player_ui.food = food_count
 	$player_ui.ducks = duck_count
 
-func player_movement():
+func player_movement(delta):
 	if Input.is_action_pressed("move_forwards"):
-		velocity.y = -1
+		velocity.y = -1 * SPEED * delta
 		$Sprite.flip_v = true
 	elif Input.is_action_pressed("move_backwards"):
-		velocity.y = 1
+		velocity.y = 1 * SPEED * delta
 		$Sprite.flip_v = false
 	else:
 		velocity.y = 0
 		
 	if Input.is_action_pressed("move_left"):
-		velocity.x = -1
+		velocity.x = -1 * SPEED * delta
 		$Sprite.flip_h = true
 	elif Input.is_action_pressed("move_right"):
-		velocity.x = 1
+		velocity.x = 1 * SPEED * delta
 		$Sprite.flip_h = false
 	else:
 		velocity.x = 0
@@ -61,7 +61,6 @@ func player_movement():
 
 func throw_food():
 	var dir_to = global_position.direction_to(get_global_mouse_position())
-	var distance_to = global_position.distance_to(get_global_mouse_position())
 	food = FOOD.instance()
 	food.position = global_position + dir_to*45
 	food.dir = dir_to
