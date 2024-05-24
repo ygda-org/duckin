@@ -11,7 +11,7 @@ func _process(_delta):
 	_update()
 
 func _update():
-	if($info/money.text.length() != String(money).length()):
+	if($info/money.text.length() == String(money).length()):
 		_recenter()
 	elif($info/food.text.length() != String(money).length()):
 		_recenter()

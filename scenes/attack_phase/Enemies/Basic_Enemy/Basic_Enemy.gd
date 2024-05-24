@@ -16,7 +16,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	# Moves to Vector(0,0) at a speed of 1 unit per second
-	var speed = 20 # Change this to increase it to more units/second
+	var speed = 90 # Change this to increase it to more units/second
 	global_position = global_position.move_toward(Vector2(0,0), delta * speed)
 	
 	if (global_position == Vector2(0, 0)):
