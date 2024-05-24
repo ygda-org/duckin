@@ -9,10 +9,10 @@
 [node name="DuckSpawner" type="Node2D" parent="."]
 script = ExtResource( 2 )
 
-[node name="player" parent="." instance=ExtResource( 1 )]
-
 [node name="TileMap" type="TileMap" parent="."]
 scale = Vector2( 3, 3 )
 tile_set = ExtResource( 3 )
 format = 1
 tile_data = PoolIntArray( -131074, 13, 0, -131072, 12, 0, -131071, 1, 0, -131070, 2, 0, -131069, 3, 0, -131068, 11, 0, -131067, 6, 0 )
+
+[node name="player" parent="." instance=ExtResource( 1 )]
