@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var speed = 250
+export var speed = 450
 var velocity = Vector2(0,0)
 var click_position = Vector2(0,0)
 var damage = 50
@@ -29,6 +29,7 @@ func blow_up():
 		var distance = position.distance_to(enemy.global_position)
 		if distance <= blast_radius:
 			enemy.take_damage(damage)	
+			player.change_money(1)
 	player._duck_ping()
 	queue_free()
 
