@@ -12,22 +12,33 @@ export var money = 10
 export var is_active = true
 export var is_attacking = false
 export var can_attack = false
+var duck_types = ["Duck0", "Duck1"]
+var duck_inventory = [0]
+var default_duck = 0
+
+func _ready():
+	duck_inventory = []
+	for i in range(duck_types.size()):
+		duck_inventory.append(0)
 
 func _physics_process(delta):
-	if !is_active:
-		return
-	
 	update_ui()
 	
-	if is_attacking:
-		if Input.is_action_just_pressed("ui_left_click"):
-			throw_duck()
-		return
-		
-	player_movement()
-	if can_throw and food_count > 0 and Input.is_action_just_pressed("ui_left_click"):
-		throw_food()
-		change_food(-1)
+	if is_active:
+		if is_attacking:
+			if Input.is_action_just_pressed("ui_left_click"):
+				throw_duck()
+			return
+			
+		player_movement()
+		if can_throw and food_count > 0 and Input.is_action_just_pressed("ui_left_click"):
+			throw_food()
+			change_food(-1)
+	
+	if Input.is_action_just_pressed("switch"):
+		print("from: " + String(duck_types[default_duck]) + ": " + String(duck_inventory[default_duck]))
+		default_duck = (default_duck + 1) % duck_inventory.size()
+		print("to: " + String(duck_types[default_duck]) + ": " + String(duck_inventory[default_duck]))
 	
 	#test buying food
 	#if Input.is_action_just_pressed("ui_up"):
@@ -92,7 +103,13 @@ func _on_throw_timer_timeout():
 	
 func addDucks(duckNum): # Called in duck_food.gd to add ducks to the players duck count on collection
 	duck_count += duckNum
-	
+	duck_inventory[0] += duckNum
+
+func addTypeDucks(duckNum, duckType):
+	duck_count += duckNum
+	var i = duck_types.find(duckType)
+	duck_inventory[i] += duckNum
+
 func change_food(change): # Call with positive value to add food, negative value to remove food.
 	food_count += change
 
