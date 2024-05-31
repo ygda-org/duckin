@@ -3,7 +3,8 @@ extends KinematicBody2D
 var velocity = Vector2()
 export var SPEED = 120  # velocity of 2 when 60 FPS
 const FOOD = preload("res://scenes/player/duck_food.tscn")
-const DUCK = preload("res://scenes/Explosive Duck/Explosive Duck.tscn")
+const DUCK_EXPLO = preload("res://scenes/Explosive Duck/Explosive Duck.tscn")
+const DUCK_CHARG = preload("res://scenes/chargingDuck/ChargingDuck.tscn")
 var food = FOOD.instance()
 var can_throw = true
 export var food_count = 10
@@ -12,6 +13,7 @@ export var money = 0
 export var is_active = true
 export var is_attacking = false
 export var can_attack = false
+var rng = RandomNumberGenerator.new()
 
 func _physics_process(delta):
 	if !is_active:
@@ -82,7 +84,12 @@ func throw_food():
 	
 func throw_duck():
 	if duck_count > 0:
-		var duck = DUCK.instance()
+		var temp = rng.randi_range (0, 1)
+		var duck
+		if(temp == 1):
+			duck = DUCK_CHARG.instance()
+		else:
+			duck = DUCK_EXPLO.instance()
 		get_parent().add_child(duck)
 		addDucks(-1)
 

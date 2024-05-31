@@ -11,6 +11,6 @@ func _ready():
 
 func _on_Button_button_down():
 	if playerRef.money > 0:
-		playerRef.food_count += 1
+		playerRef.food_count += 2
 		playerRef.money -= 1
 		money_display.text = "Money : " + str(playerRef.money)
