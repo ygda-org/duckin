@@ -5,6 +5,7 @@ export var max_time = 0  # Placeholder value
 export var money = 0
 export var food = 0
 export var ducks = 0
+export var hp = 0
 
 
 func _process(_delta):
@@ -17,10 +18,13 @@ func _update():
 		_recenter()
 	elif($info/ducks.text.length() != String(money).length()):
 		_recenter()
+	elif($info/hp.text.length() != String(money).length()):
+		_recenter()
 	
 	$info/money.text = String(money)
 	$info/food.text = String(food)
 	$info/ducks.text = String(ducks)
+	$info/hp.text = String(hp)
 	
 	$timer.value = (time/max_time) * $timer.max_value
 

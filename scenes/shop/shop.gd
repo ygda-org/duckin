@@ -16,7 +16,7 @@ func shop_menu():
 	if in_range and menu == null:
 		player.is_active = false
 		menu = MENU.instance()
-		menu.position = player.position
+		menu.position = get_viewport().size / 2
 		menu.playerRef = player
 		get_viewport().add_child(menu)
 		$RichTextLabel.text = "Press 'e' to close shop"

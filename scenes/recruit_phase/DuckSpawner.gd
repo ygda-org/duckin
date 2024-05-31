@@ -6,7 +6,7 @@ extends Node2D
 # var b = "text"
 
 onready var BASIC_DUCK = preload("res://scenes/wanderingDuck/WanderingDuck.tscn")
-onready var CHARGING_DUCK = preload("res://scenes/chargingDuck/ChargingDuck.tscn")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var amountOfDucks = 30
