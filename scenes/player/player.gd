@@ -3,8 +3,7 @@ extends KinematicBody2D
 var velocity = Vector2()
 export var SPEED = 120  # velocity of 2 when 60 FPS
 const FOOD = preload("res://scenes/player/duck_food.tscn")
-const DUCK_EXPLO = preload("res://scenes/Explosive Duck/Explosive Duck.tscn")
-const DUCK_CHARG = preload("res://scenes/chargingDuck/ChargingDuck.tscn")
+const DUCK = preload("res://scenes/Explosive Duck/Explosive Duck.tscn")
 var food = FOOD.instance()
 var can_throw = true
 export var food_count = 10
@@ -13,7 +12,8 @@ export var money = 0
 export var is_active = true
 export var is_attacking = false
 export var can_attack = false
-var rng = RandomNumberGenerator.new()
+export var hp = 200
+var enemy_dmg = 10
 
 func _physics_process(delta):
 	if !is_active:
@@ -31,14 +31,20 @@ func _physics_process(delta):
 		throw_food()
 		change_food(-1)
 	
-	#test buying food
-	#if Input.is_action_just_pressed("ui_up"):
-	#	spend_money(1)
+	var collision = move_and_collide(Vector2.ZERO)
+	if collision and collision.collider.is_in_group("res://scenes/attack_phase/Enemies/Basic_Enemy/Basic_Enemy.tscn"):
+		take_damage(enemy_dmg)
 
 func update_ui():
 	$player_ui.money = money
 	$player_ui.food = food_count
 	$player_ui.ducks = duck_count
+	$player_ui.hp = hp
+
+func take_damage(amount):
+	hp -= amount    
+	if hp <= 0:
+		die()
 
 func player_movement(delta):
 	if Input.is_action_pressed("move_forwards"):
@@ -84,12 +90,7 @@ func throw_food():
 	
 func throw_duck():
 	if duck_count > 0:
-		var temp = rng.randi_range (0, 1)
-		var duck
-		if(temp == 1):
-			duck = DUCK_CHARG.instance()
-		else:
-			duck = DUCK_EXPLO.instance()
+		var duck = DUCK.instance()
 		get_parent().add_child(duck)
 		addDucks(-1)
 
@@ -113,3 +114,6 @@ func spend_money(n): #buying food
 
 func _duck_ping():
 	$scene_changer._duck_ping()
+
+func die():
+	queue_free()
